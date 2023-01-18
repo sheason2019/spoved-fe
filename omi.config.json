@@ -1,7 +1,15 @@
 {
   "remote": {
     "repository": "https://github.com/sheason2019/spoved-idl.git",
-    "branch": "master",
+    "branch": "feat/login",
     "outDir": "./idl-repo"
-  }
+  },
+  "configs": [
+    {
+      "entry": ["idl-repo"],
+      "targetDir": "./src/api-lib",
+      "method": "client",
+      "lang": "ts"
+    }
+  ]
 }
