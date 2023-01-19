@@ -3,11 +3,14 @@ import router from "./routes";
 import RouterLayout from "./common/components/router-layout";
 
 import "./App.css";
+import GlobalProvider from "./common/components/global-provider";
 
 function App() {
   return (
     <RouterLayout>
-      <RouterProvider router={router} />
+      <GlobalProvider>
+        <RouterProvider router={router} />
+      </GlobalProvider>
     </RouterLayout>
   );
 }

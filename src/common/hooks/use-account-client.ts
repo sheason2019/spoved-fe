@@ -1,4 +1,3 @@
-import { AxiosInstance } from "axios";
 import { AccountServiceClient } from "../../api-lib/account";
 import { createClientProxy } from "../utils/client-factory";
 

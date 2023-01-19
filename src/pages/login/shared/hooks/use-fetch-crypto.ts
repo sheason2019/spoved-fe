@@ -1,13 +1,20 @@
+import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
+import { AccountCrypto } from "../../../../api-lib/account";
 import useAccountClient from "../../../../common/hooks/use-account-client";
 
+export const cryptoAtom = atom<AccountCrypto | null>(null);
+
 const useFetchCrypto = () => {
+  const [crypto, setCrypto] = useAtom(cryptoAtom);
   const { accountClient } = useAccountClient();
 
   const fetchCrypto = async () => {
-    const [res, err] = await accountClient.GetAccountCrypto();
-
-    console.log(res, err);
+    const [data, err] = await accountClient.GetAccountCrypto();
+    if (err) {
+      return;
+    }
+    setCrypto(data);
   };
   useEffect(() => {
     fetchCrypto();

@@ -1,6 +1,8 @@
 import { AxiosInstance } from "axios";
 
-type BaseFunction = (...args: any) => any;
+export type BaseFunction = (...args: any) => any;
+
+export type Await<T extends Promise<any>> = T extends Promise<infer R> ? R : any;
 
 interface RequestError {
   code: number;
@@ -9,7 +11,7 @@ interface RequestError {
 
 interface BoxedRequest<T extends BaseFunction> {
   (...args: Parameters<T>): Promise<
-    [ReturnType<T>, null] | [null, RequestError]
+    [Await<ReturnType<T>>["data"], null] | [null, RequestError]
   >;
 }
 

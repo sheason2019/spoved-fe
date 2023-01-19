@@ -5,8 +5,6 @@ import useFetchCrypto from "../../hooks/use-fetch-crypto";
 
 interface IProps {
   title: string;
-  loading: boolean;
-  loadingTitle: string;
 }
 
 const AccountFrame: FC<PropsWithChildren<IProps>> = ({ children, title }) => {
