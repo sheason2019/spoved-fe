@@ -1,12 +1,17 @@
 import { FC, PropsWithChildren } from "react";
 
 import { Stack, Paper, Typography } from "@mui/material";
+import useFetchCrypto from "../../hooks/use-fetch-crypto";
 
 interface IProps {
   title: string;
+  loading: boolean;
+  loadingTitle: string;
 }
 
 const AccountFrame: FC<PropsWithChildren<IProps>> = ({ children, title }) => {
+  useFetchCrypto();
+
   return (
     <Stack sx={{ flex: 1 }} justifyContent="center" alignItems="center">
       <Paper
