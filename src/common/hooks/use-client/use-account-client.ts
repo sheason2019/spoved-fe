@@ -1,5 +1,5 @@
-import { AccountServiceClient } from "../../api-lib/account";
-import { createClientProxy } from "../utils/client-factory";
+import { AccountServiceClient } from "../../../api-lib/account";
+import { createClientProxy } from "../../utils/client-factory";
 
 const accountClient = new AccountServiceClient({
   host: "/api",
@@ -8,7 +8,7 @@ const accountClient = new AccountServiceClient({
 // 构建一个工厂函数，使用proxy代理
 const accountProxy = createClientProxy(accountClient);
 
-const useAccountClient = () => {
+export const useAccountClient = () => {
   const setAuthorization = (token: string) => {};
 
   return { accountClient: accountProxy, setAuthorization };

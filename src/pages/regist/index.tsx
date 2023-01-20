@@ -7,7 +7,7 @@ import useRegist from "./hooks/use-regist";
 const RegistPage: FC = () => {
   const { account, toLogin } = useRegist();
   return (
-    <AccountFrame title="用户注册">
+    <AccountFrame title="用户注册" height={280}>
       <Box mt={3} px={3}>
         <Stack spacing={1}>
           <TextField

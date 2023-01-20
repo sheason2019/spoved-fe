@@ -8,9 +8,9 @@ const LoginPage: FC = () => {
   const { account, setAccount, toRegist } = useLogin();
 
   return (
-    <AccountFrame title="用户登录">
+    <AccountFrame title="用户登录" height={240}>
       <Box mt={3} px={3}>
-        <Stack spacing={1}>
+        <Stack spacing={1} sx={{ flex: 1 }}>
           <TextField
             size="small"
             placeholder="用户名"
