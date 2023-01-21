@@ -1,3 +1,19 @@
+export interface LoginResponse {
+  token?: string;
+}
+
+export interface GetUsernameRepeatResponse {
+  repeat?: boolean;
+}
+
+export interface GetUsernameRepeatPayload {
+  name?: string;
+}
+
+export interface User {
+  username?: string;
+}
+
 export interface AccountInfo {
   username?: string;
   password?: string;

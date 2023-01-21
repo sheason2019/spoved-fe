@@ -1,8 +1,10 @@
-import { AxiosInstance } from "axios";
+import { AxiosError, AxiosInstance } from "axios";
 
 export type BaseFunction = (...args: any) => any;
 
-export type Await<T extends Promise<any>> = T extends Promise<infer R> ? R : any;
+export type Await<T extends Promise<any>> = T extends Promise<infer R>
+  ? R
+  : any;
 
 interface RequestError {
   code: number;
@@ -34,8 +36,13 @@ export function createClientProxy<T extends {}>(client: T): ClientProxy<T> {
           } catch (e: any) {
             const err: RequestError = {
               code: e.code ?? -1,
-              message: e.message ?? "未知错误",
+              message: "",
             };
+            if (e instanceof AxiosError) {
+              err.message = e.response?.data ?? "未知的请求错误";
+            } else {
+              err.message = e.message ?? "未知错误";
+            }
             return [null, err];
           }
         };

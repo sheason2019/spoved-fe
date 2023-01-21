@@ -58,7 +58,11 @@ const GlobalDialog: FC<IGlobalDialogProps> = ({
   };
 
   return (
-    <Dialog open={open} onClose={clickAwayToCancel ? cancel : undefined}>
+    <Dialog
+      open={open}
+      onClose={clickAwayToCancel ? cancel : undefined}
+      fullWidth
+    >
       {title && <DialogTitle>{title}</DialogTitle>}
       {content && <DialogContent>{content}</DialogContent>}
       <DialogActions>

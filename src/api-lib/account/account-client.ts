@@ -1,5 +1,12 @@
 import axios, { AxiosInstance } from "axios";
-import { AccountInfo, AccountCrypto } from ".";
+import {
+  AccountCrypto,
+  LoginResponse,
+  GetUsernameRepeatResponse,
+  GetUsernameRepeatPayload,
+  User,
+  AccountInfo,
+} from ".";
 
 interface ClientConfig {
   host?: string;
@@ -19,9 +26,21 @@ export class AccountServiceClient {
     );
   }
   Login(account: AccountInfo) {
-    return this.ins.post<void>(this.host + "/AccountService.Login", account);
+    return this.ins.post<LoginResponse>(
+      this.host + "/AccountService.Login",
+      account
+    );
   }
   Regist(account: AccountInfo) {
     return this.ins.post<void>(this.host + "/AccountService.Regist", account);
+  }
+  GetUsernameRepeat(payload: GetUsernameRepeatPayload) {
+    return this.ins.get<GetUsernameRepeatResponse>(
+      this.host + "/AccountService.UsernameRepeat",
+      { params: payload }
+    );
+  }
+  GetCurrentUser() {
+    return this.ins.get<User>(this.host + "/AccountService.CurrentUser");
   }
 }

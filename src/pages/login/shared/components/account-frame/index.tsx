@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useMemo } from "react";
+import { FC, PropsWithChildren, useEffect, useMemo } from "react";
 
 import {
   Stack,
@@ -8,19 +8,19 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import useFetchCrypto from "../../hooks/use-fetch-crypto";
+import useCrypto from "../../hooks/use-crypto";
 
 interface IProps {
   title: string;
-  height: number;
+  minHeight: number;
 }
 
 const AccountFrame: FC<PropsWithChildren<IProps>> = ({
   children,
   title,
-  height,
+  minHeight,
 }) => {
-  const { crypto, fetchCrypto } = useFetchCrypto();
+  const { crypto, fetchCrypto } = useCrypto();
 
   const contentRender = useMemo(() => {
     // 没有获取到加密信息时，需要展示加载中页面
@@ -48,7 +48,11 @@ const AccountFrame: FC<PropsWithChildren<IProps>> = ({
         {children}
       </>
     );
-  }, [crypto]);
+  }, [crypto, title, children]);
+
+  useEffect(() => {
+    fetchCrypto();
+  }, []);
 
   return (
     <Stack sx={{ flex: 1 }} justifyContent="center" alignItems="center">
@@ -57,7 +61,7 @@ const AccountFrame: FC<PropsWithChildren<IProps>> = ({
         sx={{
           py: 2,
           width: 360,
-          height,
+          minHeight,
           border: "1px solid rgba(36,41,47, 0.4)",
         }}
       >
