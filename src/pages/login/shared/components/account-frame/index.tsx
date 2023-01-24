@@ -9,6 +9,8 @@ import {
   Box,
 } from "@mui/material";
 import useCrypto from "../../hooks/use-crypto";
+import useCheckLogin from "../../../../index/shared/hooks/use-check-login";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
   title: string;
@@ -20,6 +22,8 @@ const AccountFrame: FC<PropsWithChildren<IProps>> = ({
   title,
   minHeight,
 }) => {
+  const navigate = useNavigate();
+  const { currentUser, checkLogin } = useCheckLogin();
   const { crypto, fetchCrypto } = useCrypto();
 
   const contentRender = useMemo(() => {
@@ -50,9 +54,19 @@ const AccountFrame: FC<PropsWithChildren<IProps>> = ({
     );
   }, [crypto, title, children]);
 
-  useEffect(() => {
+  const preLogin = async () => {
+    const isLogin = await checkLogin();
+    if (isLogin) {
+      // 如果已经登录则自动跳转到首页
+      return navigate("/");
+    }
+
     fetchCrypto();
-  }, []);
+  };
+
+  useEffect(() => {
+    preLogin();
+  }, [currentUser]);
 
   return (
     <Stack sx={{ flex: 1 }} justifyContent="center" alignItems="center">

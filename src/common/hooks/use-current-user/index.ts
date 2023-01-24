@@ -22,6 +22,7 @@ const useCurrentUser = () => {
     setAuthorization(token);
 
     // 若指定七日内自动登录，则将Token保存到Storage
+    localStorage.removeItem("Authorization");
     if (useStorage) {
       localStorage.setItem("Authorization", token);
     }

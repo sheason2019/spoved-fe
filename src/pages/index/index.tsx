@@ -1,8 +1,22 @@
-import { FC } from "react";
-import useCheckLogin from "./hooks/use-check-login";
+import { FC, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import useCheckLogin from "./shared/hooks/use-check-login";
 
 const IndexPage: FC = () => {
-  useCheckLogin();
+  const navigate = useNavigate();
+  const { checkLogin, currentUser } = useCheckLogin();
+
+  const loginGuard = async () => {
+    const isLogin = await checkLogin();
+
+    if (!isLogin) {
+      navigate("/login");
+    }
+  };
+
+  useEffect(() => {
+    loginGuard();
+  }, [currentUser]);
 
   return (
     <div>
