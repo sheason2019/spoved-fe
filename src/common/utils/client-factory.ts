@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance } from "axios";
+import { AxiosInstance } from "axios";
 
 export type BaseFunction = (...args: any) => any;
 
@@ -34,15 +34,11 @@ export function createClientProxy<T extends {}>(client: T): ClientProxy<T> {
             const res = await f.apply(target, args);
             return [res.data, null];
           } catch (e: any) {
+            console.log(e);
             const err: RequestError = {
-              code: e.code ?? -1,
-              message: "",
+              code: e.response?.data?.code ?? -1,
+              message: e.response?.data?.message ?? e.message ?? "未知错误",
             };
-            if (e instanceof AxiosError) {
-              err.message = e.response?.data ?? "未知的请求错误";
-            } else {
-              err.message = e.message ?? "未知错误";
-            }
             return [null, err];
           }
         };

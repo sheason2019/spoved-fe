@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { AccountInfo } from "../../../api-lib/account";
 import { useAccountClient } from "../../../common/hooks/use-client";
 import { useDialog } from "../../../common/hooks/use-dialog";
+import useAccountFormStatus, {
+  AccountFormStatus,
+} from "../../login/shared/hooks/use-account-form-status";
 import useCrypto from "../../login/shared/hooks/use-crypto";
 
 interface RegistInfo extends AccountInfo {
@@ -11,6 +14,7 @@ interface RegistInfo extends AccountInfo {
 }
 
 const useRegist = () => {
+  const { status, setStatus } = useAccountFormStatus();
   const { crypto, encryptString } = useCrypto();
   const DialogApi = useDialog();
   const navigate = useNavigate();
@@ -41,6 +45,10 @@ const useRegist = () => {
   };
 
   const handleSubmit = async () => {
+    if (status !== AccountFormStatus.Inputing) {
+      return;
+    }
+
     // 校验
     const check = await validate();
     if (!check) {
@@ -53,11 +61,14 @@ const useRegist = () => {
       password: encryptString(account.password + crypto!.salt!),
       salt: crypto!.salt,
     };
+    setStatus(AccountFormStatus.Posting);
     // 发送注册请求
     const [_, err] = await accountClient.Regist(payload);
     if (err) {
+      setStatus(AccountFormStatus.Inputing);
       throw DialogApi.error(err.message);
     } else {
+      setStatus(AccountFormStatus.Success);
       return DialogApi.success({
         title: "注册成功",
         content: "点击确认按钮跳转到登录页面",
@@ -132,6 +143,8 @@ const useRegist = () => {
     account,
     setAccount,
     errors,
+
+    status,
 
     validateUsername,
     validatePassword,

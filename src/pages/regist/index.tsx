@@ -1,14 +1,17 @@
-import { FC } from "react";
-import { Box, Stack, Typography, TextField, Button } from "@mui/material";
+import { FC, useMemo } from "react";
+import { Box, Stack, Typography, TextField } from "@mui/material";
 import Link from "../../common/components/link";
 import AccountFrame from "../login/shared/components/account-frame";
 import useRegist from "./hooks/use-regist";
 import ErrorText from "../login/shared/components/error-text";
+import { LoadingButton } from "@mui/lab";
+import { AccountFormStatus } from "../login/shared/hooks/use-account-form-status";
 
 const RegistPage: FC = () => {
   const {
-    account,
+    status,
     errors,
+    account,
     handleChange,
     handleSubmit,
     toLogin,
@@ -16,6 +19,17 @@ const RegistPage: FC = () => {
     validatePassword,
     validateRepassword,
   } = useRegist();
+
+  const buttonText = useMemo(() => {
+    switch (status) {
+      case AccountFormStatus.Inputing:
+        return "注册";
+      case AccountFormStatus.Posting:
+        return "正在注册";
+      case AccountFormStatus.Success:
+        return "注册成功";
+    }
+  }, []);
 
   return (
     <AccountFrame title="用户注册" minHeight={280}>
@@ -54,14 +68,16 @@ const RegistPage: FC = () => {
             helperText={<ErrorText text={errors.repassword!} />}
           />
         </Stack>
-        <Button
+        <LoadingButton
+          loading={status === AccountFormStatus.Posting}
+          color={status}
           variant="contained"
           fullWidth
           sx={{ mt: 2 }}
           onClick={handleSubmit}
         >
-          注册
-        </Button>
+          {buttonText}
+        </LoadingButton>
       </Box>
       <Typography
         variant="body2"

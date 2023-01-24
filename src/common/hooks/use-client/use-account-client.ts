@@ -1,17 +1,33 @@
+import axios, { CreateAxiosDefaults } from "axios";
+import { useMemo } from "react";
 import { AccountServiceClient } from "../../../api-lib/account";
 import { createClientProxy } from "../../utils/client-factory";
-
-const accountClient = new AccountServiceClient({
-  host: "/api",
-});
-
-// 构建一个工厂函数，使用proxy代理
-const accountProxy = createClientProxy(accountClient);
+import useAxiosInstance from "./use-axios-instance";
 
 export const useAccountClient = () => {
-  const setAuthorization = (token: string) => {};
+  const { ins } = useAxiosInstance();
 
-  return { accountClient: accountProxy, setAuthorization };
+  const client = useMemo(() => {
+    const accountClient = new AccountServiceClient({
+      host: "/api",
+      ins,
+    });
+
+    // 通过Proxy对返回值和错误进行拆包和再组装
+    return createClientProxy(accountClient);
+  }, [ins]);
+
+  const clientWithOption = (opt: CreateAxiosDefaults) => {
+    const ins = axios.create(opt);
+    const client = new AccountServiceClient({
+      host: "/api",
+      ins,
+    });
+
+    return createClientProxy(client);
+  };
+
+  return { accountClient: client, clientWithOption };
 };
 
 export default useAccountClient;
