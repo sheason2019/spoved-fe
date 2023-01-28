@@ -102,7 +102,7 @@ const useRegist = () => {
     }
 
     let useKeyword = false;
-    ["login", "regist", "profile", "service"].forEach((keyword) => {
+    ["login", "regist", "profile", "service", "new"].forEach((keyword) => {
       if (account.username === keyword) {
         useKeyword = true;
       }

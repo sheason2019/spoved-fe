@@ -1,4 +1,5 @@
-import { FC, useEffect, useMemo } from "react";
+import { Button, List, Stack, Typography } from "@mui/material";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useCheckLogin from "./shared/hooks/use-check-login";
 
@@ -19,11 +20,23 @@ const IndexPage: FC = () => {
   }, [currentUser]);
 
   return (
-    <div>
-      {[...new Array(200)].map((_, index) => (
-        <div key={index}>INDEX PAGE</div>
-      ))}
-    </div>
+    <Stack direction="row" sx={{ background: "whitesmoke", flex: 1 }}>
+      <List sx={{ width: 320, background: "#FFFFFF", px: 3, py: 2 }}>
+        <Stack sx={{ width: "100%" }} direction="row" alignItems="center">
+          <Typography flex={1} fontWeight="bold">
+            项目列表
+          </Typography>
+          <Button variant="contained" onClick={() => navigate("/new")}>
+            新建
+          </Button>
+        </Stack>
+      </List>
+      <List>
+        <Typography variant="h5" sx={{ px: 2, py: 1.25 }}>
+          动态
+        </Typography>
+      </List>
+    </Stack>
   );
 };
 
