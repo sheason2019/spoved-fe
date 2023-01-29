@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import useAutoLogin from "../../../../common/hooks/hooks/use-auto-login";
+import useAutoLogin from "../../../../common/hooks/use-auto-login";
 import { currentUserAtom } from "../../../../common/store/current-user";
 
 const useCheckLogin = () => {

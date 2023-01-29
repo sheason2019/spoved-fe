@@ -1,18 +1,18 @@
 import axios, { AxiosInstance } from "axios";
 import {
-  AccountCrypto,
-  LoginResponse,
   GetUsernameRepeatResponse,
   GetUsernameRepeatPayload,
   User,
   AccountInfo,
+  AccountCrypto,
+  LoginResponse,
 } from ".";
 
 interface ClientConfig {
   host?: string;
   ins?: AxiosInstance;
 }
-export class AccountServiceClient {
+export class AccountApiClient {
   host: string;
   ins: AxiosInstance;
 
@@ -21,26 +21,24 @@ export class AccountServiceClient {
     this.ins = config?.ins ?? axios.create();
   }
   GetAccountCrypto() {
-    return this.ins.get<AccountCrypto>(
-      this.host + "/AccountService.AccountCrypto"
-    );
+    return this.ins.get<AccountCrypto>(this.host + "/AccountApi.AccountCrypto");
   }
   Login(account: AccountInfo) {
     return this.ins.post<LoginResponse>(
-      this.host + "/AccountService.Login",
+      this.host + "/AccountApi.Login",
       account
     );
   }
   Regist(account: AccountInfo) {
-    return this.ins.post<void>(this.host + "/AccountService.Regist", account);
+    return this.ins.post<void>(this.host + "/AccountApi.Regist", account);
   }
   GetUsernameRepeat(payload: GetUsernameRepeatPayload) {
     return this.ins.get<GetUsernameRepeatResponse>(
-      this.host + "/AccountService.UsernameRepeat",
+      this.host + "/AccountApi.UsernameRepeat",
       { params: payload }
     );
   }
   GetCurrentUser() {
-    return this.ins.get<User>(this.host + "/AccountService.CurrentUser");
+    return this.ins.get<User>(this.host + "/AccountApi.CurrentUser");
   }
 }

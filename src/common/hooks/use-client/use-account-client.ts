@@ -1,6 +1,6 @@
 import axios, { CreateAxiosDefaults } from "axios";
 import { useMemo } from "react";
-import { AccountServiceClient } from "../../../api-lib/account";
+import { AccountApiClient } from "../../../api-lib/account";
 import { createClientProxy } from "../../utils/client-factory";
 import useAxiosInstance from "./use-axios-instance";
 
@@ -8,7 +8,7 @@ export const useAccountClient = () => {
   const { ins } = useAxiosInstance();
 
   const client = useMemo(() => {
-    const accountClient = new AccountServiceClient({
+    const accountClient = new AccountApiClient({
       host: "/api",
       ins,
     });
@@ -19,7 +19,7 @@ export const useAccountClient = () => {
 
   const clientWithOption = (opt: CreateAxiosDefaults) => {
     const ins = axios.create(opt);
-    const client = new AccountServiceClient({
+    const client = new AccountApiClient({
       host: "/api",
       ins,
     });

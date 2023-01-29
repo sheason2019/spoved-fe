@@ -2,25 +2,17 @@ import {
   Box,
   Button,
   Container,
-  MenuItem,
   Paper,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { FC } from "react";
-import LabelSelect from "./components/label-select";
 import LabelText from "./components/label-text";
 import useCreateProject from "./hooks/use-create-project";
 
-const MOCK_IMAGE_OPTIONS = [
-  { name: "nginx" },
-  { name: "go" },
-  { name: "node-16" },
-];
-
 const NewProjectPage: FC = () => {
-  const { handleSubmit, handleChange, handleSelect, form } = useCreateProject();
+  const { handleSubmit, handleChange, form } = useCreateProject();
 
   return (
     <Box sx={{ background: "whitesmoke", flex: 1, py: 2 }}>
@@ -31,6 +23,14 @@ const NewProjectPage: FC = () => {
             基本信息
           </Typography>
           <Stack spacing={1} pt={2}>
+            <LabelText
+              label="创建人"
+              labelWidth={80}
+              sx={{ width: 380 }}
+              name="projName"
+              value={form.owner}
+              disabled
+            />
             <LabelText
               label="项目名称"
               labelWidth={80}
@@ -55,43 +55,14 @@ const NewProjectPage: FC = () => {
                 name="describe"
                 value={form.describe}
                 onChange={handleChange}
+                placeholder="在此处填入项目的简介信息"
                 multiline
+                minRows={3}
+                maxRows={5}
+                sx={{ mt: 0.5 }}
                 fullWidth
               />
             </Box>
-          </Stack>
-          <Typography sx={{ mt: 2 }} fontWeight="bold">
-            项目信息
-          </Typography>
-          <Stack pt={2} spacing={1}>
-            <LabelSelect
-              label="构建镜像"
-              labelWidth={80}
-              name="iamgeBuild"
-              value={form.imageBuild}
-              sx={{ width: 380 }}
-              onChange={handleSelect}
-            >
-              {MOCK_IMAGE_OPTIONS.map((option) => (
-                <MenuItem key={option.name} value={option.name}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </LabelSelect>
-            <LabelSelect
-              label="发布镜像"
-              labelWidth={80}
-              sx={{ width: 380 }}
-              name="imagePublish"
-              value={form.imagePublish}
-              onChange={handleSelect}
-            >
-              {MOCK_IMAGE_OPTIONS.map((option) => (
-                <MenuItem key={option.name} value={option.name}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </LabelSelect>
           </Stack>
           <Button variant="contained" type="submit" sx={{ mt: 2 }}>
             创建项目
