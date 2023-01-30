@@ -12,3 +12,8 @@ export interface GetProjectsResponse {
   projects?: Project[];
   pagination?: Pagination;
 }
+
+export interface GetProjectPayload {
+  username?: string;
+  projectName?: string;
+}

@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { Pagination } from "../common";
-import { Project, GetProjectsResponse } from ".";
+import { Project, GetProjectsResponse, GetProjectPayload } from ".";
 
 interface ClientConfig {
   host?: string;
@@ -22,5 +22,10 @@ export class ProjectApiClient {
   }
   PostProject(project: Project) {
     return this.ins.post<Project>(this.host + "/ProjectApi.Project", project);
+  }
+  GetProject(payload: GetProjectPayload) {
+    return this.ins.get<Project>(this.host + "/ProjectApi.Project", {
+      params: payload,
+    });
   }
 }
