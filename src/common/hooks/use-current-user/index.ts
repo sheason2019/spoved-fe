@@ -20,6 +20,8 @@ const useCurrentUser = () => {
 
     // 将Token保存到内存中
     setAuthorization(token);
+    // 将Token保存到SessionStorage中
+    sessionStorage.setItem("Authorization", token);
 
     // 若指定七日内自动登录，则将Token保存到Storage
     localStorage.removeItem("Authorization");

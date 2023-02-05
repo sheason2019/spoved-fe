@@ -5,6 +5,13 @@ const useAutoLogin = () => {
   const { saveToken } = useCurrentUser();
 
   const fetchToken = (): string | null => {
+    // 先尝试从sessionStorage中获取Token
+    const token = sessionStorage.getItem("Authorization");
+    if (token) {
+      return token;
+    }
+
+    // 否则尝试从localStorage获取Token
     return localStorage.getItem("Authorization");
   };
 
