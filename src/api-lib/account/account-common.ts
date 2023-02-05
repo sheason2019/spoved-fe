@@ -1,5 +1,17 @@
+export interface LoginResponse {
+  token?: string;
+}
+
+export interface GetUsernameRepeatResponse {
+  repeat?: boolean;
+}
+
 export interface GetUsernameRepeatPayload {
   name?: string;
+}
+
+export interface GetSshPubKeyResponse {
+  pubKey?: string;
 }
 
 export interface User {
@@ -15,12 +27,4 @@ export interface AccountInfo {
 export interface AccountCrypto {
   salt?: string;
   pubKey?: string;
-}
-
-export interface LoginResponse {
-  token?: string;
-}
-
-export interface GetUsernameRepeatResponse {
-  repeat?: boolean;
 }

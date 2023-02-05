@@ -1,11 +1,12 @@
 import axios, { AxiosInstance } from "axios";
 import {
+  LoginResponse,
   GetUsernameRepeatResponse,
   GetUsernameRepeatPayload,
+  GetSshPubKeyResponse,
   User,
   AccountInfo,
   AccountCrypto,
-  LoginResponse,
 } from ".";
 
 interface ClientConfig {
@@ -40,5 +41,10 @@ export class AccountApiClient {
   }
   GetCurrentUser() {
     return this.ins.get<User>(this.host + "/AccountApi.CurrentUser");
+  }
+  GetSshPubKey() {
+    return this.ins.get<GetSshPubKeyResponse>(
+      this.host + "/AccountApi.SshPubKey"
+    );
   }
 }

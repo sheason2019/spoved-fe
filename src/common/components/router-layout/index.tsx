@@ -1,9 +1,10 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import { Stack, Divider } from "@mui/material";
 import Header from "./components/header";
 import Scrollable from "../scrollable";
+import { Outlet } from "react-router-dom";
 
-const RouterLayout: FC<PropsWithChildren> = ({ children }) => {
+const RouterLayout: FC = () => {
   return (
     <Stack sx={{ flex: 1, overflow: "hidden" }}>
       <Header />
@@ -13,7 +14,9 @@ const RouterLayout: FC<PropsWithChildren> = ({ children }) => {
         sx={{ flex: 1, overflow: "hidden" }}
         divider={<Divider orientation="vertical" flexItem />}
       >
-        <Scrollable sx={{ flex: 1 }}>{children}</Scrollable>
+        <Scrollable sx={{ flex: 1 }}>
+          <Outlet />
+        </Scrollable>
       </Stack>
     </Stack>
   );
