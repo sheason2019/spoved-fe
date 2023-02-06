@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { atom, useAtom } from "jotai";
 import { useParams } from "react-router-dom";
 import { Project } from "../../../api-lib/project";
 import useProjectClient from "../../../common/hooks/use-client/use-project-client";
 
+const projectAtom = atom<Project>({});
+
 const useProject = () => {
   const { username, projectName } = useParams();
 
-  const [proj, setProj] = useState<Project>({});
+  const [proj, setProj] = useAtom(projectAtom);
   const { projectClient } = useProjectClient();
 
   const fetchProject = async () => {

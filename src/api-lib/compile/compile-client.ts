@@ -1,6 +1,9 @@
 import axios, { AxiosInstance } from "axios";
-import { GetCompileRecordResponse, CompileRecord } from ".";
-import { Pagination } from "../common";
+import {
+  CompileRecord,
+  GetCompileRecordsPayload,
+  GetCompileRecordsResponse,
+} from ".";
 
 interface ClientConfig {
   host?: string;
@@ -20,10 +23,10 @@ export class CompileApiClient {
       payload
     );
   }
-  GetCompileRecords(pagination: Pagination) {
-    return this.ins.get<GetCompileRecordResponse>(
+  GetCompileRecords(payload: GetCompileRecordsPayload) {
+    return this.ins.get<GetCompileRecordsResponse>(
       this.host + "/CompileApi.CompileRecords",
-      { params: pagination }
+      { params: payload }
     );
   }
 }
