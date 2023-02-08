@@ -1,8 +1,10 @@
-import { Box, Stack } from "@mui/material";
 import { FC, useEffect } from "react";
+import { Stack } from "@mui/material";
+
+import RecordItem from "../record-item";
 import useCompileRecords from "../../hooks/use-compile-records";
 
-const RecordsList: FC = () => {
+const RecordList: FC = () => {
   const { proj, records, fetchData, pagination, setPagination } =
     useCompileRecords();
 
@@ -11,12 +13,12 @@ const RecordsList: FC = () => {
   }, [proj.id]);
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} sx={{ mt: 2 }}>
       {records.map((record) => (
-        <Box key={record.id}>{JSON.stringify(record)}</Box>
+        <RecordItem key={record.id} record={record} />
       ))}
     </Stack>
   );
 };
 
-export default RecordsList;
+export default RecordList;

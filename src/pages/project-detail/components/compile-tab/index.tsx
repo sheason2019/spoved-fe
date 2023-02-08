@@ -1,7 +1,7 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Pagination, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import CompileDialog from "./componenets/compile-dialog";
-import RecordsList from "./componenets/records-list";
+import RecordList from "./componenets/record-list";
 import useCompileDialog from "./hooks/use-compile-dialog";
 
 const CompileTab: FC = () => {
@@ -17,7 +17,10 @@ const CompileTab: FC = () => {
           点击编译
         </Button>
       </Stack>
-      <RecordsList />
+      <RecordList />
+      <Pagination
+        sx={{ ".MuiPagination-ul": { justifyContent: "center" }, mt: 2, mb: 1 }}
+      />
       <CompileDialog />
     </>
   );
