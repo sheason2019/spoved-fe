@@ -8,6 +8,9 @@ export default defineConfig({
   plugins: [
     react({ babel: { plugins: [jotaiDebugLabel, jotaiReactRefresh] } }),
   ],
+  build: {
+    outDir: "./.nginx/html",
+  },
   server: {
     proxy: {
       "/api/": {

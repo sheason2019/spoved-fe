@@ -25,3 +25,5 @@ dist-ssr
 
 # Omi IDL remote repo
 idl-repo
+
+.nginx/html
