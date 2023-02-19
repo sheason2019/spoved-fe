@@ -1,4 +1,4 @@
-cd /
+cd /code
 
 npm i -g pnpm
 
