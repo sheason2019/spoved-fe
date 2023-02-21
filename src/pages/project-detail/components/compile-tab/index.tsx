@@ -18,9 +18,6 @@ const CompileTab: FC = () => {
         </Button>
       </Stack>
       <RecordList />
-      <Pagination
-        sx={{ ".MuiPagination-ul": { justifyContent: "center" }, mt: 2, mb: 1 }}
-      />
       <CompileDialog />
     </>
   );

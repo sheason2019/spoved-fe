@@ -19,7 +19,8 @@ const useCompileRecords = () => {
   const fetchData = async () => {
     const [data, err] = await client.GetCompileRecords({
       projectId: proj.id,
-      pagination,
+      page: pagination.page,
+      pageSize: pagination.pageSize,
     });
     if (err) {
       throw err;
