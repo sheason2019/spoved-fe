@@ -21,7 +21,9 @@ const RecordList: FC = () => {
   const { proj, records, fetchData, pagination } = useCompileRecords();
 
   useEffect(() => {
-    fetchData();
+    if (proj.id) {
+      fetchData();
+    }
   }, [proj.id]);
 
   return (
