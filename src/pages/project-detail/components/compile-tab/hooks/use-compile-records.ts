@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Pagination } from "../../../../../api-lib/common";
-import { CompileRecord } from "../../../../../api-lib/compile";
+import { CompileOrder } from "../../../../../api-lib/compile";
 import useCompileClient from "../../../../../common/hooks/use-client/use-compile-client";
 import useProject from "../../../hooks/use-project";
 
@@ -14,10 +14,10 @@ const useCompileRecords = () => {
     pageSize: 25,
   });
 
-  const [records, setRecords] = useState<CompileRecord[]>([]);
+  const [records, setRecords] = useState<CompileOrder[]>([]);
 
   const fetchData = async () => {
-    const [data, err] = await client.GetCompileRecords({
+    const [data, err] = await client.GetCompileOrders({
       projectId: proj.id,
       page: pagination.page,
       pageSize: pagination.pageSize,

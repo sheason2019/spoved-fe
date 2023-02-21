@@ -11,10 +11,10 @@ const CompileTab: FC = () => {
     <>
       <Stack direction="row" alignItems="center">
         <Typography fontWeight="bold" sx={{ flex: 1 }}>
-          编译记录
+          编译工单
         </Typography>
         <Button onClick={handleOpen} variant="contained">
-          点击编译
+          创建工单
         </Button>
       </Stack>
       <RecordList />

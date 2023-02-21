@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import {
-  CompileRecord,
-  GetCompileRecordsPayload,
-  GetCompileRecordsResponse,
+  CompileOrder,
+  GetCompileOrdersPayload,
+  GetCompileOrdersResponse,
 } from ".";
 
 interface ClientConfig {
@@ -17,15 +17,15 @@ export class CompileApiClient {
     this.host = config?.host ?? "";
     this.ins = config?.ins ?? axios.create();
   }
-  PostCompile(payload: CompileRecord) {
-    return this.ins.post<CompileRecord>(
-      this.host + "/CompileApi.Compile",
+  PostCompileOrder(payload: CompileOrder) {
+    return this.ins.post<CompileOrder>(
+      this.host + "/CompileApi.CompileOrder",
       payload
     );
   }
-  GetCompileRecords(payload: GetCompileRecordsPayload) {
-    return this.ins.get<GetCompileRecordsResponse>(
-      this.host + "/CompileApi.CompileRecords",
+  GetCompileOrders(payload: GetCompileOrdersPayload) {
+    return this.ins.get<GetCompileOrdersResponse>(
+      this.host + "/CompileApi.CompileOrders",
       { params: payload }
     );
   }

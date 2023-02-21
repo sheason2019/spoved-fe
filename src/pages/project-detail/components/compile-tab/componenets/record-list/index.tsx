@@ -31,6 +31,7 @@ const RecordList: FC = () => {
           <TableHead>
             <TableRow>
               <TableCell>编译工单 ID</TableCell>
+              <TableCell>操作人</TableCell>
               <TableCell>编译版本</TableCell>
               <TableCell>编译镜像</TableCell>
               <TableCell>编译状态</TableCell>
@@ -44,12 +45,13 @@ const RecordList: FC = () => {
                 <TableCell component="th" scope="row">
                   {record.id}
                 </TableCell>
+                <TableCell>{record.operator}</TableCell>
                 <TableCell>{record.version}</TableCell>
                 <TableCell>{record.image}</TableCell>
                 <TableCell>{STATUS_TEXT[record.statusCode!]}</TableCell>
                 <TableCell>{timeStr(record.createAt ?? 0)}</TableCell>
                 <TableCell>
-                  <Button variant="contained">查看详情</Button>
+                  <Button variant="outlined">查看详情</Button>
                 </TableCell>
               </TableRow>
             ))}

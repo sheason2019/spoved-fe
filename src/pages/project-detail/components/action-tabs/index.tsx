@@ -3,7 +3,7 @@ import { Paper, Tab, Tabs } from "@mui/material";
 import { FC, useState } from "react";
 import CompileTab from "../compile-tab";
 
-const TAB_OPTIONS = ["编译", "部署"];
+const TAB_OPTIONS = ["编译工单", "部署工单", "小流量部署"];
 
 const ActionTabs: FC = () => {
   const [tabIndex, setTabIndex] = useState(0);

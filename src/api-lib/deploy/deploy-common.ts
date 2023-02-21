@@ -1,23 +1,23 @@
 import { Pagination } from "../common";
 
-export interface CompileOrder {
+export interface DeployOrder {
   id?: number;
   projectId?: number;
   image?: string;
-  version?: string;
+  versoin?: string;
   createAt?: number;
   operator?: string;
-  branch?: string;
+  compileOrderId?: number;
   statusCode?: number;
 }
 
-export interface GetCompileOrdersPayload {
+export interface GetDeployOrdersPayload {
   projectId?: number;
   page?: number;
   pageSize?: number;
 }
 
-export interface GetCompileOrdersResponse {
-  records?: CompileOrder[];
+export interface GetDeployOrdersResponse {
+  records?: DeployOrder[];
   pagination?: Pagination;
 }
