@@ -2,6 +2,7 @@ import { TabContext, TabPanel } from "@mui/lab";
 import { Paper, Tab, Tabs } from "@mui/material";
 import { FC, useState } from "react";
 import CompileTab from "../compile-tab";
+import DeployTab from "../deploy-tab";
 
 const TAB_OPTIONS = ["编译工单", "部署工单", "小流量部署"];
 
@@ -20,7 +21,7 @@ const ActionTabs: FC = () => {
           <CompileTab />
         </TabPanel>
         <TabPanel value={TAB_OPTIONS[1]} sx={{ px: 1, py: 2 }}>
-          部署
+          <DeployTab />
         </TabPanel>
       </Paper>
     </TabContext>

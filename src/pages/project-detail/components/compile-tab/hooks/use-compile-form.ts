@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import useCompileClient from "../../../../../common/hooks/use-client/use-compile-client";
 import { useDialog } from "../../../../../common/hooks/use-dialog";
 import useProject from "../../../hooks/use-project";
+import { useEnvInput } from "../../env-input";
 import useCompileDialog from "./use-compile-dialog";
+import useCompileOrders from "./use-compile-orders";
 
 interface IForm {
   projectId: number;
@@ -20,12 +22,15 @@ const DEFAULT_ERR = {
 
 const useCompileForm = () => {
   const { proj } = useProject();
+  const { envPairs, setEnvPairs } = useEnvInput();
 
   const { handleClose } = useCompileDialog();
+  const { fetchData } = useCompileOrders();
 
   const { client } = useCompileClient();
   const DialogApi = useDialog();
 
+  // 表单内容及错误内容
   const [form, setForm] = useState<IForm>({
     projectId: proj.id ?? 0,
     image: "",
@@ -34,6 +39,7 @@ const useCompileForm = () => {
   });
   const [error, setError] = useState<Record<keyof IForm, string>>(DEFAULT_ERR);
 
+  // 响应式设定ProjectID的值
   useEffect(() => {
     proj.id && handleInput("projectId", proj.id);
   }, [proj]);
@@ -52,9 +58,15 @@ const useCompileForm = () => {
       return;
     }
 
-    const [data, err] = await client.PostCompile({
+    const env: Record<string, string> = {};
+    envPairs.forEach((pair) => {
+      env[pair.name] = pair.value;
+    });
+
+    const [data, err] = await client.PostCompileOrder({
       ...form,
       branch: form.branch.length === 0 ? "master" : form.branch,
+      env: JSON.stringify(env),
     });
     if (err) {
       return DialogApi.error(err.message);
@@ -62,8 +74,10 @@ const useCompileForm = () => {
 
     handleClose();
     DialogApi.success("创建编译工单成功" + JSON.stringify(data));
+    fetchData();
   };
 
+  // 表单校验
   const validate = () => {
     let allow = true;
     allow = validateImage() && allow;
@@ -91,6 +105,9 @@ const useCompileForm = () => {
 
     error,
     setError,
+
+    envPairs,
+    setEnvPairs,
 
     handleInput,
     handleError,

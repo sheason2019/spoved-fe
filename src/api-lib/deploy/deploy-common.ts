@@ -21,3 +21,7 @@ export interface GetDeployOrdersResponse {
   records?: DeployOrder[];
   pagination?: Pagination;
 }
+
+export interface GetOptionalImagesResponse {
+  images?: string[];
+}

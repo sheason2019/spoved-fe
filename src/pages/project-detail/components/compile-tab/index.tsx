@@ -1,7 +1,7 @@
 import { Button, Pagination, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import CompileDialog from "./componenets/compile-dialog";
-import RecordList from "./componenets/record-list";
+import CompileOrderList from "./componenets/compile-order-list";
 import useCompileDialog from "./hooks/use-compile-dialog";
 
 const CompileTab: FC = () => {
@@ -17,7 +17,7 @@ const CompileTab: FC = () => {
           创建工单
         </Button>
       </Stack>
-      <RecordList />
+      <CompileOrderList />
       <CompileDialog />
     </>
   );

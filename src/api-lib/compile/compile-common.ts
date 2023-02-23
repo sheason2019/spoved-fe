@@ -8,6 +8,7 @@ export interface CompileOrder {
   createAt?: number;
   operator?: string;
   branch?: string;
+  env?: string;
   statusCode?: number;
 }
 
@@ -20,4 +21,8 @@ export interface GetCompileOrdersPayload {
 export interface GetCompileOrdersResponse {
   records?: CompileOrder[];
   pagination?: Pagination;
+}
+
+export interface GetOptionalImagesResponse {
+  images?: string[];
 }

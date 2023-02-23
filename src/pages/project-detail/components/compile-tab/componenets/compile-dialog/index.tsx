@@ -7,25 +7,34 @@ import {
   MenuItem,
   Stack,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import LabelSelect from "../../../../../new/components/label-select";
 import LabelText from "../../../../../new/components/label-text";
+import { EnvInput } from "../../../env-input";
 import useCompileDialog from "../../hooks/use-compile-dialog";
 import useCompileForm from "../../hooks/use-compile-form";
+import useCompileImages from "../../hooks/use-compile-images";
 
 const CompileDialog: FC = () => {
   const { open, handleClose } = useCompileDialog();
-  const { form, handleSubmit, handleInput } = useCompileForm();
+  const { form, handleSubmit, handleInput, envPairs, setEnvPairs } =
+    useCompileForm();
+
+  const { images, fetchImages } = useCompileImages();
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
       <DialogTitle>创建编译工单</DialogTitle>
       <DialogContent>
         <Stack spacing={1}>
           <LabelText
             label="分支"
             labelWidth={80}
-            sx={{ width: 380 }}
+            sx={{ flex: 1 }}
             onChange={(e) => handleInput("branch", e.target.value)}
             placeholder="默认为master分支"
             value={form.branch}
@@ -33,7 +42,7 @@ const CompileDialog: FC = () => {
           <LabelSelect
             label="版本选择"
             labelWidth={80}
-            sx={{ width: 380 }}
+            sx={{ flex: 1 }}
             onChange={(e) => handleInput("version", e.target.value as any)}
             value={form.version}
           >
@@ -46,13 +55,16 @@ const CompileDialog: FC = () => {
           <LabelSelect
             label="镜像选择"
             labelWidth={80}
-            sx={{ width: 380 }}
+            sx={{ flex: 1 }}
             onChange={(e) => handleInput("image", e.target.value as string)}
             value={form.image}
           >
-            <MenuItem value="node:16-alpine">node:16-alpine</MenuItem>
+            {images.map((image) => (
+              <MenuItem value={image}>{image}</MenuItem>
+            ))}
           </LabelSelect>
         </Stack>
+        <EnvInput envPairs={envPairs} setEnvPairs={setEnvPairs} />
       </DialogContent>
       <DialogActions>
         <Button variant="contained" onClick={handleSubmit}>

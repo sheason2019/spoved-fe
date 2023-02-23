@@ -13,12 +13,12 @@ import {
   Typography,
 } from "@mui/material";
 
-import useCompileRecords from "../../hooks/use-compile-records";
 import STATUS_TEXT from "../../constant";
 import { timeStr } from "../../../../../../common/utils/time-str";
+import useDeployOrders from "../../hooks/use-deploy-orders";
 
-const RecordList: FC = () => {
-  const { proj, records, fetchData, pagination } = useCompileRecords();
+const DeployOrderList: FC = () => {
+  const { proj, orders, fetchData, pagination } = useDeployOrders();
 
   useEffect(() => {
     if (proj.id) {
@@ -42,16 +42,16 @@ const RecordList: FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {records.map((record) => (
-              <TableRow key={record.id}>
+            {orders.map((order) => (
+              <TableRow key={order.id}>
                 <TableCell component="th" scope="row">
-                  {record.id}
+                  {order.id}
                 </TableCell>
-                <TableCell>{record.operator}</TableCell>
-                <TableCell>{record.version}</TableCell>
-                <TableCell>{record.image}</TableCell>
-                <TableCell>{STATUS_TEXT[record.statusCode!]}</TableCell>
-                <TableCell>{timeStr(record.createAt ?? 0)}</TableCell>
+                <TableCell>{order.operator}</TableCell>
+                <TableCell>{order.compileOrderId}</TableCell>
+                <TableCell>{order.image}</TableCell>
+                <TableCell>{STATUS_TEXT[order.statusCode!]}</TableCell>
+                <TableCell>{timeStr(order.createAt ?? 0)}</TableCell>
                 <TableCell>
                   <Button variant="outlined">查看详情</Button>
                 </TableCell>
@@ -70,4 +70,4 @@ const RecordList: FC = () => {
   );
 };
 
-export default RecordList;
+export default DeployOrderList;

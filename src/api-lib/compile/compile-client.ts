@@ -1,8 +1,9 @@
 import axios, { AxiosInstance } from "axios";
 import {
-  CompileOrder,
   GetCompileOrdersPayload,
   GetCompileOrdersResponse,
+  GetOptionalImagesResponse,
+  CompileOrder,
 } from ".";
 
 interface ClientConfig {
@@ -27,6 +28,11 @@ export class CompileApiClient {
     return this.ins.get<GetCompileOrdersResponse>(
       this.host + "/CompileApi.CompileOrders",
       { params: payload }
+    );
+  }
+  GetOptionalImages() {
+    return this.ins.get<GetOptionalImagesResponse>(
+      this.host + "/CompileApi.OptionalImages"
     );
   }
 }
