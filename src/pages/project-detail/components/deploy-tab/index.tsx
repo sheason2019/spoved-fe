@@ -1,20 +1,14 @@
 import { FC } from "react";
-import { Button, Stack, Typography } from "@mui/material";
-import useDeployDialog from "./hooks/use-deploy-dialogs";
+import { Stack, Typography } from "@mui/material";
 import DeployOrderList from "./components/deploy-order-list";
 
 const DeployTab: FC = () => {
-  const { handleOpen } = useDeployDialog();
-
   return (
     <>
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" sx={{ height: "2.5rem" }}>
         <Typography fontWeight="bold" sx={{ flex: 1 }}>
-          编译工单
+          部署工单
         </Typography>
-        <Button onClick={handleOpen} variant="contained">
-          创建工单
-        </Button>
       </Stack>
       <DeployOrderList />
     </>

@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import CompileTab from "../compile-tab";
 import DeployTab from "../deploy-tab";
 
-const TAB_OPTIONS = ["编译工单", "部署工单", "小流量部署"];
+const TAB_OPTIONS = ["编译工单", "部署工单", "服务状态"];
 
 const ActionTabs: FC = () => {
   const [tabIndex, setTabIndex] = useState(0);

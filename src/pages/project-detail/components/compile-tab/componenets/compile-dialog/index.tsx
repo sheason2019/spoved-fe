@@ -17,8 +17,15 @@ import useCompileImages from "../../hooks/use-compile-images";
 
 const CompileDialog: FC = () => {
   const { open, handleClose } = useCompileDialog();
-  const { form, handleSubmit, handleInput, envPairs, setEnvPairs } =
-    useCompileForm();
+  const {
+    form,
+    error,
+    handleSubmit,
+    handleInput,
+    handleReset,
+    envPairs,
+    setEnvPairs,
+  } = useCompileForm();
 
   const { images, fetchImages } = useCompileImages();
 
@@ -38,6 +45,7 @@ const CompileDialog: FC = () => {
             onChange={(e) => handleInput("branch", e.target.value)}
             placeholder="默认为master分支"
             value={form.branch}
+            errText={error.branch}
           />
           <LabelSelect
             label="版本选择"
@@ -45,6 +53,7 @@ const CompileDialog: FC = () => {
             sx={{ flex: 1 }}
             onChange={(e) => handleInput("version", e.target.value as any)}
             value={form.version}
+            errText={error.version}
           >
             {["Patch", "Minor", "Major"].map((val) => (
               <MenuItem key={val} value={val}>
@@ -58,17 +67,23 @@ const CompileDialog: FC = () => {
             sx={{ flex: 1 }}
             onChange={(e) => handleInput("image", e.target.value as string)}
             value={form.image}
+            errText={error.image}
           >
             {images.map((image) => (
-              <MenuItem value={image}>{image}</MenuItem>
+              <MenuItem key={image} value={image}>
+                {image}
+              </MenuItem>
             ))}
           </LabelSelect>
         </Stack>
         <EnvInput envPairs={envPairs} setEnvPairs={setEnvPairs} />
       </DialogContent>
       <DialogActions>
+        <Button variant="outlined" onClick={handleReset}>
+          重置
+        </Button>
         <Button variant="contained" onClick={handleSubmit}>
-          提交
+          提交工单
         </Button>
       </DialogActions>
     </Dialog>

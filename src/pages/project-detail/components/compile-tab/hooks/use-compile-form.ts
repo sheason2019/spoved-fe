@@ -30,18 +30,20 @@ const useCompileForm = () => {
   const { client } = useCompileClient();
   const DialogApi = useDialog();
 
-  // 表单内容及错误内容
-  const [form, setForm] = useState<IForm>({
+  const DEFAULT_FORM: IForm = {
     projectId: proj.id ?? 0,
     image: "",
     version: "Patch",
     branch: "",
-  });
+  };
+
+  // 表单内容及错误内容
+  const [form, setForm] = useState<IForm>(DEFAULT_FORM);
   const [error, setError] = useState<Record<keyof IForm, string>>(DEFAULT_ERR);
 
-  // 响应式设定ProjectID的值
+  // Project发生变化时重置表单
   useEffect(() => {
-    proj.id && handleInput("projectId", proj.id);
+    handleReset();
   }, [proj]);
 
   const handleInput = <F extends keyof IForm>(field: F, value: IForm[F]) => {
@@ -77,8 +79,13 @@ const useCompileForm = () => {
     fetchData();
   };
 
+  const handleReset = () => {
+    setForm(DEFAULT_FORM);
+  };
+
   // 表单校验
   const validate = () => {
+    setError(DEFAULT_ERR);
     let allow = true;
     allow = validateImage() && allow;
     allow = validateVersion() && allow;
@@ -93,7 +100,7 @@ const useCompileForm = () => {
     return !!form.image;
   };
   const validateVersion = (): boolean => {
-    if (!form.image) {
+    if (!form.version) {
       handleError("version", "版本不能为空");
     }
     return !!form.version;
@@ -109,6 +116,7 @@ const useCompileForm = () => {
     envPairs,
     setEnvPairs,
 
+    handleReset,
     handleInput,
     handleError,
     handleSubmit,

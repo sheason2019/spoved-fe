@@ -1,8 +1,9 @@
 import axios, { AxiosInstance } from "axios";
 import {
-  GetOptionalImagesResponse,
+  DeployOrder,
   GetDeployOrdersPayload,
   GetDeployOrdersResponse,
+  GetOptionalImagesResponse,
 } from ".";
 
 interface ClientConfig {
@@ -21,6 +22,12 @@ export class DeployApiClient {
     return this.ins.get<GetDeployOrdersResponse>(
       this.host + "/DeployApi.DeployOrders",
       { params: payload }
+    );
+  }
+  PostDeployOrder(order: DeployOrder) {
+    return this.ins.post<DeployOrder>(
+      this.host + "/DeployApi.DeployOrder",
+      order
     );
   }
   GetOptionalImages() {

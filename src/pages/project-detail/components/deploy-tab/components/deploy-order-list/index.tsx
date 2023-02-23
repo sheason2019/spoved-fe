@@ -48,7 +48,7 @@ const DeployOrderList: FC = () => {
                   {order.id}
                 </TableCell>
                 <TableCell>{order.operator}</TableCell>
-                <TableCell>{order.compileOrderId}</TableCell>
+                <TableCell>{order.compileOrder?.version}</TableCell>
                 <TableCell>{order.image}</TableCell>
                 <TableCell>{STATUS_TEXT[order.statusCode!]}</TableCell>
                 <TableCell>{timeStr(order.createAt ?? 0)}</TableCell>

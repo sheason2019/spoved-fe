@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 import {
   Button,
+  ButtonGroup,
   Pagination,
   Paper,
   Stack,
@@ -16,9 +17,11 @@ import {
 import useCompileOrders from "../../hooks/use-compile-orders";
 import STATUS_TEXT from "../../constant";
 import { timeStr } from "../../../../../../common/utils/time-str";
+import useDeployDialog from "../../hooks/use-deploy-dialog";
 
 const CompileOrderList: FC = () => {
   const { proj, orders, fetchData, pagination } = useCompileOrders();
+  const { handleOpen } = useDeployDialog();
 
   useEffect(() => {
     if (proj.id) {
@@ -53,7 +56,15 @@ const CompileOrderList: FC = () => {
                 <TableCell>{STATUS_TEXT[order.statusCode!]}</TableCell>
                 <TableCell>{timeStr(order.createAt ?? 0)}</TableCell>
                 <TableCell>
-                  <Button variant="outlined">查看详情</Button>
+                  <ButtonGroup variant="outlined">
+                    <Button>详情</Button>
+                    <Button
+                      disabled={order.statusCode !== 1}
+                      onClick={() => handleOpen(order)}
+                    >
+                      部署
+                    </Button>
+                  </ButtonGroup>
                 </TableCell>
               </TableRow>
             ))}
