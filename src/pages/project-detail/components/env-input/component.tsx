@@ -28,6 +28,7 @@ export const EnvInput: FC<IEnvInput> = ({ envPairs, setEnvPairs }) => {
         <Stack spacing={1} sx={{ mt: 1 }}>
           {envPairs.map((envPair, index) => (
             <EnvPairRender
+              key={index}
               index={index}
               envPair={envPair}
               setEnvPairs={setEnvPairs}
