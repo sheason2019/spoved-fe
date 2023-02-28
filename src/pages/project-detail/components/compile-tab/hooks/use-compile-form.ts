@@ -111,7 +111,6 @@ const useCompileForm = () => {
     return !!form.version;
   };
   const validateEnvpair = (): boolean => {
-    console.log('validate env pair')
     let allow = true;
 
     const set = new Set<string>();
@@ -127,7 +126,7 @@ const useCompileForm = () => {
         allow = false;
         return {
           ...item,
-          errText: "环境变量名必须以字母开头，且只能为字母和数字的组合",
+          errText: "环境变量名必须以字母开头，且只能为字母、数字和下划线的组合",
         };
       }
       // 对PRODUCTION变量进行特殊处理

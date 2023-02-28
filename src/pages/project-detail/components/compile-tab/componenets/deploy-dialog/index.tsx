@@ -11,13 +11,22 @@ import { FC, useEffect } from "react";
 import LabelSelect from "../../../../../new/components/label-select";
 import LabelSwitch from "../../../../../new/components/label-switch";
 import LabelText from "../../../../../new/components/label-text";
+import { HeaderInput } from "../../../header-input";
 import useDeployDialog from "../../hooks/use-deploy-dialog";
 import useDeployForm from "../../hooks/use-deploy-form";
 import useDeployImages from "../../hooks/use-deploy-images";
 
 export const DeployDialog: FC = () => {
-  const { error, form, handleInput, handleSubmit, handleReset } =
-    useDeployForm();
+  const {
+    error,
+    form,
+    headerPairs,
+    setHeaderPairs,
+    handleInput,
+    handleSubmit,
+    handleReset,
+    validateHeader,
+  } = useDeployForm();
   const { dialog, open, handleClose } = useDeployDialog();
   const { images, fetchImages } = useDeployImages();
 
@@ -62,8 +71,16 @@ export const DeployDialog: FC = () => {
             label="小流量部署"
             labelWidth={140}
             onChange={(_, checked) => handleInput("miniflow", checked)}
+            errText={error.miniflow}
             checked={form.miniflow}
           />
+          {form.miniflow && (
+            <HeaderInput
+              headerPairs={headerPairs}
+              setHeaderPairs={setHeaderPairs}
+              headerOnblur={validateHeader}
+            />
+          )}
         </Stack>
       </DialogContent>
       <DialogActions>

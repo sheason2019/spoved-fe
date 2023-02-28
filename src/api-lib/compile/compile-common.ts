@@ -1,9 +1,5 @@
 import { Pagination } from "../common";
 
-export interface GetOptionalImagesResponse {
-  images?: string[];
-}
-
 export interface CompileOrder {
   id?: number;
   projectId?: number;
@@ -26,4 +22,8 @@ export interface GetCompileOrdersPayload {
 export interface GetCompileOrdersResponse {
   records?: CompileOrder[];
   pagination?: Pagination;
+}
+
+export interface GetOptionalImagesResponse {
+  images?: string[];
 }

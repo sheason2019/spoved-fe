@@ -18,41 +18,31 @@ interface IHeaderInput {
   headerOnblur?: TextFieldProps["onBlur"];
 }
 
-export const EnvInput: FC<IHeaderInput> = ({
+export const HeaderInput: FC<IHeaderInput> = ({
   headerPairs,
   setHeaderPairs,
   headerOnblur,
 }) => {
   const handleAddEnvPair = () => {
-    setEnvPairs([...envPairs, { name: "", value: "", errText: "" }]);
+    setHeaderPairs([...headerPairs, { header: "", value: "", errText: "" }]);
   };
 
   return (
     <>
       <Stack sx={{ mt: 1 }}>
-        <Typography sx={{ flex: 1 }}>环境变量</Typography>
+        <Typography sx={{ flex: 1 }}>小流量Header信息</Typography>
         <Stack spacing={1} sx={{ mt: 1 }}>
-          {production && (
-            <EnvPairRender
-              envPair={{
-                name: "PRODUCTION",
-                value: "true",
-                errText: "",
-                readOnly: true,
-              }}
-            />
-          )}
-          {envPairs.map((envPair, index) => (
-            <EnvPairRender
+          {headerPairs.map((headerPair, index) => (
+            <HeaderPairRender
               key={index}
               index={index}
-              envPair={envPair}
-              setEnvPairs={setEnvPairs}
-              nameOnblur={nameOnblur}
+              headerPair={headerPair}
+              setHeaderPairs={setHeaderPairs}
+              headerOnblur={headerOnblur}
             />
           ))}
           <Button variant="outlined" onClick={handleAddEnvPair}>
-            添加新的环境变量
+            添加新的Header匹配
           </Button>
         </Stack>
       </Stack>
@@ -60,33 +50,38 @@ export const EnvInput: FC<IHeaderInput> = ({
   );
 };
 
-interface IEnvPairRender {
+interface IHeaderPairRender {
   index?: number;
-  envPair: EnvPair;
-  setEnvPairs?: Dispatch<SetStateAction<EnvPair[]>>;
-  nameOnblur?: TextFieldProps["onBlur"];
+  headerPair: HeaderPair;
+  setHeaderPairs?: Dispatch<SetStateAction<HeaderPair[]>>;
+  headerOnblur?: TextFieldProps["onBlur"];
 }
 
-const EnvPairRender: FC<IEnvPairRender> = ({
+const HeaderPairRender: FC<IHeaderPairRender> = ({
   index,
-  envPair,
-  setEnvPairs,
-  nameOnblur,
+  headerPair,
+  setHeaderPairs,
+  headerOnblur,
 }) => {
   const handleOnChange: TextFieldProps["onChange"] = (e) => {
-    setEnvPairs &&
-      setEnvPairs((prev) =>
-        prev.map((envPair, i) => {
+    setHeaderPairs &&
+      setHeaderPairs((prev) =>
+        prev.map((headPair, i) => {
           if (i === index) {
-            return { ...envPair, [e.target.name]: e.target.value, errText: "" };
+            return {
+              ...headPair,
+              [e.target.name]: e.target.value,
+              errText: "",
+            };
           }
-          return envPair;
+          return headPair;
         })
       );
   };
 
   const handleDelete = () => {
-    setEnvPairs && setEnvPairs((prev) => prev.filter((_, i) => i !== index));
+    setHeaderPairs &&
+      setHeaderPairs((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -94,34 +89,30 @@ const EnvPairRender: FC<IEnvPairRender> = ({
       <Stack direction="row" alignItems="center">
         <TextField
           sx={{ flex: 2 }}
-          value={envPair.name}
+          value={headerPair.header}
           onChange={handleOnChange}
-          disabled={envPair.readOnly}
-          onBlur={nameOnblur}
-          name="name"
+          onBlur={headerOnblur}
+          name="header"
           autoFocus
           size="small"
-          placeholder="环境变量名称"
+          placeholder="Header名称"
         />
         <Box sx={{ width: 16 }} />
         <TextField
           sx={{ flex: 3 }}
-          value={envPair.value}
+          value={headerPair.value}
           onChange={handleOnChange}
-          disabled={envPair.readOnly}
           name="value"
           size="small"
-          placeholder="环境变量值"
+          placeholder="Header值"
         />
-        {!envPair.readOnly && (
-          <IconButton sx={{ ml: 1 }} onClick={handleDelete}>
-            <Delete />
-          </IconButton>
-        )}
+        <IconButton sx={{ ml: 1 }} onClick={handleDelete}>
+          <Delete />
+        </IconButton>
       </Stack>
-      <ErrText value={envPair.errText} />
+      <ErrText value={headerPair.errText} />
     </Stack>
   );
 };
 
-export default EnvInput;
+export default HeaderInput;

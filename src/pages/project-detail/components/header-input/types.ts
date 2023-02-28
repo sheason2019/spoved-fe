@@ -1,6 +1,5 @@
 export interface HeaderPair {
-  name: string;
+  header: string;
   value: string;
   errText: string;
 }
-

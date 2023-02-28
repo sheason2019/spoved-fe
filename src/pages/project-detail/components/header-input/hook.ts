@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { EnvPair } from "./types";
+import { HeaderPair } from "./types";
 
-export const useEnvInput = () => {
-  const [envPairs, setEnvPairs] = useState<EnvPair[]>([]);
+export const useHeaderInput = () => {
+  const [headerPairs, setHeaderPairs] = useState<HeaderPair[]>([]);
 
   return {
-    envPairs,
-    setEnvPairs,
-  }
+    headerPairs,
+    setHeaderPairs,
+  };
 };
 
-export default useEnvInput;
+export default useHeaderInput;
