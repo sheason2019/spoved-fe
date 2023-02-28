@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { FC, useEffect } from "react";
 import LabelSelect from "../../../../../new/components/label-select";
+import LabelSwitch from "../../../../../new/components/label-switch";
 import LabelText from "../../../../../new/components/label-text";
 import useDeployDialog from "../../hooks/use-deploy-dialog";
 import useDeployForm from "../../hooks/use-deploy-form";
@@ -30,7 +31,7 @@ export const DeployDialog: FC = () => {
       <DialogContent>
         <Stack spacing={1}>
           <LabelText
-            label="CompileOrderID"
+            label="Compile Order ID"
             labelWidth={140}
             sx={{ flex: 1 }}
             value={dialog.compileOrder?.id}
@@ -49,6 +50,7 @@ export const DeployDialog: FC = () => {
             sx={{ flex: 1 }}
             onChange={(e) => handleInput("image", e.target.value as any)}
             value={form.image}
+            errText={error.image}
           >
             {images.map((val) => (
               <MenuItem key={val} value={val}>
@@ -56,6 +58,12 @@ export const DeployDialog: FC = () => {
               </MenuItem>
             ))}
           </LabelSelect>
+          <LabelSwitch
+            label="小流量部署"
+            labelWidth={140}
+            onChange={(_, checked) => handleInput("miniflow", checked)}
+            checked={form.miniflow}
+          />
         </Stack>
       </DialogContent>
       <DialogActions>

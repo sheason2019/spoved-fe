@@ -123,7 +123,7 @@ const useCompileForm = () => {
       }
       set.add(item.name);
       // 正则校验
-      if (!/^[a-zA-z][0-9a-zA-Z]+$/.test(item.name)) {
+      if (!/^[a-zA-z][_0-9a-zA-Z]+$/.test(item.name)) {
         allow = false;
         return {
           ...item,

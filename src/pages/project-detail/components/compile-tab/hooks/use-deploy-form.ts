@@ -5,14 +5,17 @@ import useDeployDialog from "./use-deploy-dialog";
 
 interface IForm {
   image: string;
+  miniflow: boolean;
 }
 
 const DEFAULT_FORM: IForm = {
   image: "",
+  miniflow: false,
 };
 
 const DEFAULT_ERR = {
   image: "",
+  miniflow: "",
 };
 
 const useDeployForm = () => {
