@@ -1,3 +1,7 @@
+export interface GetSshPubKeyResponse {
+  pubKey?: string;
+}
+
 export interface User {
   username?: string;
 }
@@ -23,8 +27,4 @@ export interface GetUsernameRepeatResponse {
 
 export interface GetUsernameRepeatPayload {
   name?: string;
-}
-
-export interface GetSshPubKeyResponse {
-  pubKey?: string;
 }

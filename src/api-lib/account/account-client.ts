@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from "axios";
 import {
-  GetSshPubKeyResponse,
   User,
   AccountInfo,
   AccountCrypto,
   LoginResponse,
   GetUsernameRepeatResponse,
   GetUsernameRepeatPayload,
+  GetSshPubKeyResponse,
 } from ".";
 
 interface ClientConfig {

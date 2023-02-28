@@ -6,9 +6,11 @@ import {
   DialogTitle,
   MenuItem,
   Stack,
+  Typography,
 } from "@mui/material";
 import { FC, useEffect } from "react";
 import LabelSelect from "../../../../../new/components/label-select";
+import LabelSwitch from "../../../../../new/components/label-switch";
 import LabelText from "../../../../../new/components/label-text";
 import { EnvInput } from "../../../env-input";
 import useCompileDialog from "../../hooks/use-compile-dialog";
@@ -25,6 +27,7 @@ const CompileDialog: FC = () => {
     handleReset,
     envPairs,
     setEnvPairs,
+    validateEnvpair,
   } = useCompileForm();
 
   const { images, fetchImages } = useCompileImages();
@@ -75,8 +78,25 @@ const CompileDialog: FC = () => {
               </MenuItem>
             ))}
           </LabelSelect>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <LabelSwitch
+              label="编译环境"
+              labelWidth={80}
+              checked={form.production}
+              onChange={(_, checked) => handleInput("production", checked)}
+              errText={error.production}
+            />
+            <Typography variant="body2" color="GrayText">
+              {form.production ? "生产环境" : "测试环境"}
+            </Typography>
+          </Stack>
         </Stack>
-        <EnvInput envPairs={envPairs} setEnvPairs={setEnvPairs} />
+        <EnvInput
+          production={form.production}
+          envPairs={envPairs}
+          nameOnblur={validateEnvpair}
+          setEnvPairs={setEnvPairs}
+        />
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" onClick={handleReset}>
