@@ -8,7 +8,7 @@ export interface CompileOrder {
   createAt?: number;
   operator?: string;
   branch?: string;
-  production?: bool;
+  production?: boolean;
   env?: string;
   statusCode?: number;
 }

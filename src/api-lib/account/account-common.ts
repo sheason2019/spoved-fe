@@ -1,7 +1,3 @@
-export interface LoginResponse {
-  token?: string;
-}
-
 export interface GetUsernameRepeatResponse {
   repeat?: boolean;
 }
@@ -27,4 +23,8 @@ export interface AccountInfo {
 export interface AccountCrypto {
   salt?: string;
   pubKey?: string;
+}
+
+export interface LoginResponse {
+  token?: string;
 }

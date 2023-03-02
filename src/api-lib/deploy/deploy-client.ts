@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from "axios";
 import {
-  DeployOrder,
-  GetDeployOrdersPayload,
   GetDeployOrdersResponse,
   GetOptionalImagesResponse,
+  DeployOrder,
+  GetDeployOrdersPayload,
 } from ".";
 
 interface ClientConfig {

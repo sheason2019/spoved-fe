@@ -1,14 +1,5 @@
-import { Pagination } from "../common";
 import { CompileOrder } from "../compile";
-
-export interface GetDeployOrdersResponse {
-  records?: DeployOrder[];
-  pagination?: Pagination;
-}
-
-export interface GetOptionalImagesResponse {
-  images?: string[];
-}
+import { Pagination } from "../common";
 
 export interface DeployOrder {
   id?: number;
@@ -30,4 +21,13 @@ export interface GetDeployOrdersPayload {
   projectId?: number;
   page?: number;
   pageSize?: number;
+}
+
+export interface GetDeployOrdersResponse {
+  records?: DeployOrder[];
+  pagination?: Pagination;
+}
+
+export interface GetOptionalImagesResponse {
+  images?: string[];
 }

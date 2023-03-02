@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { Pagination } from "../common";
-import { GetProjectsResponse, GetProjectPayload, Project } from ".";
+import { GetProjectPayload, Project, GetProjectsResponse } from ".";
 
 interface ClientConfig {
   host?: string;
