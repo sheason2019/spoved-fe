@@ -36,6 +36,10 @@ export const routes: Parameters<typeof createBrowserRouter>[0] = [
         path: "/:username/:projectName",
         element: <ProjectDetail />,
       },
+      {
+        path: "/boe",
+        element: <div>BOE ENVIROMENT</div>,
+      },
     ],
   },
 ];
