@@ -37,8 +37,8 @@ export const routes: Parameters<typeof createBrowserRouter>[0] = [
         element: <ProjectDetail />,
       },
       {
-        path: "/boe",
-        element: <div>BOE ENVIROMENT</div>,
+        path: "/test",
+        element: <div>TEST MINIFLOW</div>,
       },
     ],
   },
